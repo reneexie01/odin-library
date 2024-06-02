@@ -1,7 +1,7 @@
 const myLibrary = [
-    {title: 'Brave New World', author: 'Aldous Huxley', pages: '311', readStatus: 'read'},
-    {title: '1984', author: 'George Orwell', pages: '384', readStatus: 'read'},
-    {title: 'Lord of the Flies', author: 'William Golding', pages: '224', readStatus: 'unread'},
+    {title: "Brave New World", author: "Aldous Huxley", pages: "311", readStatus: "read"},
+    {title: "1984", author: "George Orwell", pages: "384", readStatus: "read"},
+    {title: "Lord of the Flies", author: "William Golding", pages: "224", readStatus: "unread"},
 ];
 
 /* Constructor function */
@@ -19,13 +19,13 @@ function addBookToLibrary(title, author, pages, readStatus) {
 }
 
 /* Adding new submissions */
-const submitButton = document.querySelector('.submitButton');
+const submitButton = document.querySelector(".submitButton");
 
-submitButton.addEventListener('click', () => {
-    const titleValue = document.querySelector('#title').value;
-    const authorValue = document.querySelector('#author').value;
-    const pagesValue = document.querySelector('#pages').value;
-    const readStatusValue = document.querySelector('#readStatus').value;
+submitButton.addEventListener("click", () => {
+    const titleValue = document.querySelector("#title").value;
+    const authorValue = document.querySelector("#author").value;
+    const pagesValue = document.querySelector("#pages").value;
+    const readStatusValue = document.querySelector("#readStatus").value;
 
     addBookToLibrary(titleValue, authorValue, pagesValue, readStatusValue);
     const lastBook = myLibrary[myLibrary.length - 1];
@@ -37,9 +37,9 @@ submitButton.addEventListener('click', () => {
 myLibrary.forEach((book) => printBooks(book));
 
 function printBooks(book) {
-    const libraryContainer = document.querySelector('.library-container');
-    const libraryBook = document.createElement('div');
-    libraryBook.classList.add('library-book');
+    const libraryContainer = document.querySelector(".library-container");
+    const libraryBook = document.createElement("div");
+    libraryBook.classList.add("library-book");
 
     libraryBook.textContent = 
     `
@@ -50,3 +50,20 @@ function printBooks(book) {
     `;
     libraryContainer.appendChild(libraryBook);
 }
+
+/* Modal form */
+const dialog = document.querySelector("dialog");
+const showButton = document.querySelector(".open-modal");
+const closeButton = document.querySelector(".close-modal");
+
+showButton.addEventListener("click", () => {
+    dialog.showModal();
+});
+
+closeButton.addEventListener("click", () => {
+    dialog.close();
+});
+
+submitButton.addEventListener("click", () => {
+    dialog.close();
+})
