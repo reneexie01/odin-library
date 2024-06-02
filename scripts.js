@@ -1,7 +1,7 @@
 const myLibrary = [
-    {title: 'Brave New World1', author: 'Aldous Huxley1', pages: '3111', readStatus: 'read1'},
-    {title: 'Brave New World2', author: 'Aldous Huxley2', pages: '3112', readStatus: 'read2'},
-    {title: 'Brave New World3', author: 'Aldous Huxley3', pages: '3113', readStatus: 'read3'},
+    {title: 'Brave New World', author: 'Aldous Huxley', pages: '311', readStatus: 'read'},
+    {title: '1984', author: 'George Orwell', pages: '384', readStatus: 'read'},
+    {title: 'Lord of the Flies', author: 'William Golding', pages: '224', readStatus: 'unread'},
 ];
 
 /* Constructor function */
