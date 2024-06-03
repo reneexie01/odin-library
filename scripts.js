@@ -32,19 +32,20 @@ submitButton.addEventListener("click", () => {
     if (titleValue == "" || authorValue == "" || pagesValue == "" || readStatusValue == "") {
         badSubmission.textContent = `Invalid submission. Try again.`
         return;
-    } addBookToLibrary(titleValue, authorValue, pagesValue, readStatusValue);
+    } 
+    
+    addBookToLibrary(titleValue, authorValue, pagesValue, readStatusValue);
     const lastBook = myLibrary[myLibrary.length - 1];
     printBooks(lastBook);
     console.log(myLibrary);
 })
 
 /* Printing the library */
-myLibrary.forEach((book) => printBooks(book));
+myLibrary.forEach((book, index) => printBooks(book, index));
 
-function printBooks(book) {
+function printBooks(book, index) {
     const libraryContainer = document.querySelector(".library-container");
     const libraryBook = document.createElement("div");
-    libraryBook.setAttribute("data-index", "index"); //need to figure out how to get the index number here
 
     libraryBook.innerHTML = 
     `
@@ -58,6 +59,10 @@ function printBooks(book) {
     <button class="delete-book">Delete</button>
     `;
     libraryContainer.appendChild(libraryBook);
+
+    const deleteButton = libraryBook.querySelector(".delete-book");
+    deleteButton.addEventListener("click", () => deleteBook(index));
+    console.log(myLibrary);
 }
 
 /* Modal form */
@@ -76,3 +81,15 @@ closeButton.addEventListener("click", () => {
 submitButton.addEventListener("click", () => {
     dialog.close();
 })
+
+/* Delete functions */
+function deleteBook(index) {
+    myLibrary.splice(index, 1);
+    updateLibrary();
+}
+
+function updateLibrary() {
+    const libraryContainer = document.querySelector(".library-container");
+    libraryContainer.innerHTML = "";
+    myLibrary.forEach((book, index) => printBooks(book, index));
+}
