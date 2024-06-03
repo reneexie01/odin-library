@@ -27,7 +27,12 @@ submitButton.addEventListener("click", () => {
     const pagesValue = document.querySelector("#pages").value;
     const readStatusValue = document.querySelector("#readStatus").value;
 
-    addBookToLibrary(titleValue, authorValue, pagesValue, readStatusValue);
+    const badSubmission = document.querySelector(".bad-submission");
+
+    if (titleValue == "" || authorValue == "" || pagesValue == "" || readStatusValue == "") {
+        badSubmission.textContent = `Invalid submission. Try again.`
+        return;
+    } addBookToLibrary(titleValue, authorValue, pagesValue, readStatusValue);
     const lastBook = myLibrary[myLibrary.length - 1];
     printBooks(lastBook);
     console.log(myLibrary);
@@ -39,14 +44,18 @@ myLibrary.forEach((book) => printBooks(book));
 function printBooks(book) {
     const libraryContainer = document.querySelector(".library-container");
     const libraryBook = document.createElement("div");
-    libraryBook.classList.add("library-book");
+    libraryBook.setAttribute("data-index", "index"); //need to figure out how to get the index number here
 
-    libraryBook.textContent = 
+    libraryBook.innerHTML = 
     `
-    Title: ${book.title}
-    Author: ${book.author}
-    Pages: ${book.pages}
-    Read Status: ${book.readStatus}
+    <ul>
+        <li>Title: ${book.title}</li>
+        <li>Author: ${book.author}</li>
+        <li>Pages: ${book.pages}</li>
+        <li>Read Status: ${book.readStatus}</li>
+    </ul>
+    <button class="update-book">Update</button>
+    <button class="delete-book">Delete</button>
     `;
     libraryContainer.appendChild(libraryBook);
 }
