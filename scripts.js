@@ -35,8 +35,7 @@ submitButton.addEventListener("click", () => {
     } 
     
     addBookToLibrary(titleValue, authorValue, pagesValue, readStatusValue);
-    const lastBook = myLibrary[myLibrary.length - 1];
-    printBooks(lastBook);
+    updateLibrary();
     console.log(myLibrary);
 })
 
@@ -62,6 +61,10 @@ function printBooks(book, index) {
 
     const deleteButton = libraryBook.querySelector(".delete-book");
     deleteButton.addEventListener("click", () => deleteBook(index));
+        
+    const updateButton = libraryBook.querySelector(".update-book");
+    updateButton.addEventListener("click", () => updateBook(index));
+
     console.log(myLibrary);
 }
 
@@ -92,4 +95,15 @@ function updateLibrary() {
     const libraryContainer = document.querySelector(".library-container");
     libraryContainer.innerHTML = "";
     myLibrary.forEach((book, index) => printBooks(book, index));
+}
+
+/* Update functions */
+function updateBook(index) {
+    if (myLibrary[index].readStatus === "read") {
+        myLibrary[index].readStatus = "unread";
+    } else {
+        myLibrary[index].readStatus = "read";
+    }
+
+    updateLibrary();
 }
