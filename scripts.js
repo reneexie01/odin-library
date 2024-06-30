@@ -4,13 +4,25 @@ const myLibrary = [
     {title: "Lord of the Flies", author: "William Golding", pages: "224", readStatus: "unread"},
 ];
 
-/* Constructor function */
+/* Class constructor version */
+
+class Book {
+    constructor(title, author, pages, readStatus) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.readStatus = readStatus;    
+    }
+}
+
+/* Constructor function 
 function Book(title, author, pages, readStatus) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.readStatus = readStatus;
 };
+*/
 
 /* Input function */
 function addBookToLibrary(title, author, pages, readStatus) {
