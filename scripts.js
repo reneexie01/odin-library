@@ -16,16 +16,24 @@ class Book {
     toggleReadStatus() {
         this.readStatus = this.readStatus === "read" ? "unread" : "read";
     }
-}
 
-/* Constructor function 
-function Book(title, author, pages, readStatus) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.readStatus = readStatus;
-};
-*/
+    displayBook() {
+        return `
+        <ul>
+            <li>Title: ${this.title}</li>
+            <li>Author: ${this.author}</li>
+            <li>Pages: ${this.pages}</li>
+            <li>Read Status: ${this.readStatus}</li>
+        </ul>
+        <button class="update-book">Update</button>
+        <button class="delete-book">Delete</button>
+        `;
+    }
+
+    static validateBook(book) {
+        return book.title && book.author && book.pages && book.readStatus;
+    }
+}
 
 /* Mapping existing books to class */
 myLibrary = myLibrary.map((book) => new Book(book.title, book.author, book.pages, book.readStatus));
@@ -47,7 +55,9 @@ submitButton.addEventListener("click", () => {
 
     const badSubmission = document.querySelector(".bad-submission");
 
-    if (titleValue == "" || authorValue == "" || pagesValue == "" || readStatusValue == "") {
+    const newBook = new Book(titleValue, authorValue, pagesValue, readStatusValue);
+
+    if (!Book.validateBook(newBook)) {
         badSubmission.textContent = `Invalid submission. Try again.`
         return;
     } 
@@ -64,17 +74,7 @@ function printBooks(book, index) {
     const libraryContainer = document.querySelector(".library-container");
     const libraryBook = document.createElement("div");
 
-    libraryBook.innerHTML = 
-    `
-    <ul>
-        <li>Title: ${book.title}</li>
-        <li>Author: ${book.author}</li>
-        <li>Pages: ${book.pages}</li>
-        <li>Read Status: ${book.readStatus}</li>
-    </ul>
-    <button class="update-book">Update</button>
-    <button class="delete-book">Delete</button>
-    `;
+    libraryBook.innerHTML = book.displayBook();
     libraryContainer.appendChild(libraryBook);
 
     const deleteButton = libraryBook.querySelector(".delete-book");
