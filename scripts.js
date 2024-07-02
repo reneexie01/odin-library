@@ -1,17 +1,20 @@
-const myLibrary = [
+let myLibrary = [
     {title: "Brave New World", author: "Aldous Huxley", pages: "311", readStatus: "read"},
     {title: "1984", author: "George Orwell", pages: "384", readStatus: "read"},
     {title: "Lord of the Flies", author: "William Golding", pages: "224", readStatus: "unread"},
 ];
 
 /* Class constructor version */
-
 class Book {
     constructor(title, author, pages, readStatus) {
         this.title = title;
         this.author = author;
         this.pages = pages;
         this.readStatus = readStatus;    
+    }
+
+    toggleReadStatus() {
+        this.readStatus = this.readStatus === "read" ? "unread" : "read";
     }
 }
 
@@ -23,6 +26,9 @@ function Book(title, author, pages, readStatus) {
     this.readStatus = readStatus;
 };
 */
+
+/* Mapping existing books to class */
+myLibrary = myLibrary.map((book) => new Book(book.title, book.author, book.pages, book.readStatus));
 
 /* Input function */
 function addBookToLibrary(title, author, pages, readStatus) {
@@ -111,11 +117,6 @@ function updateLibrary() {
 
 /* Update functions */
 function updateBook(index) {
-    if (myLibrary[index].readStatus === "read") {
-        myLibrary[index].readStatus = "unread";
-    } else {
-        myLibrary[index].readStatus = "read";
-    }
-
+    myLibrary[index].toggleReadStatus();
     updateLibrary();
 }
