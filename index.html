@@ -13,19 +13,19 @@
         <form>
             <div class="title">
                 <label for="title">Title:</label>
-                <input autofocus type="text" id="title" name="title">
+                <input autofocus type="text" id="title" name="title" required minlength="1">
             </div>
             <div class="author">
                 <label for="author">Author:</label>
-                <input type="text" id="author" name="author">
+                <input type="text" id="author" name="author" required minlength="1">
             </div>
             <div class="pages">
                 <label for="pages">Pages:</label>
-                <input type="number" id="pages" name="pages">
+                <input type="number" id="pages" name="pages" required min="1">
             </div>
             <div class="readStatus">
                 <label for="readStatus">Have you read this book?</label>
-                <select name="readStatus" id="readStatus">
+                <select name="readStatus" id="readStatus" required>
                     <option value="unread">Not yet started (unread)</option>
                     <option value="reading">Pending (reading)</option>
                     <option value="read">Completed (read)</option>

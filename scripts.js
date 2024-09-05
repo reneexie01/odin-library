@@ -39,10 +39,11 @@ class Book {
         <button class="delete-book">Delete</button>
         `;
   }
-
+  /*
   static validateBook(book) {
     return book.title && book.author && book.pages && book.readStatus;
   }
+    */
 }
 
 /* Mapping existing books to class */
@@ -58,29 +59,36 @@ function addBookToLibrary(title, author, pages, readStatus) {
 
 /* Adding new submissions */
 const submitButton = document.querySelector(".submitButton");
+const form = document.querySelector("form");
+const badSubmission = document.querySelector(".bad-submission");
 
-submitButton.addEventListener("click", () => {
-  const titleValue = document.querySelector("#title").value;
-  const authorValue = document.querySelector("#author").value;
-  const pagesValue = document.querySelector("#pages").value;
-  const readStatusValue = document.querySelector("#readStatus").value;
+submitButton.addEventListener("click", (e) => {
+  if (!form.checkValidity()) {
+    e.preventDefault();
+    badSubmission.textContent = "Invalid submission. Ensure you add a title, author, and the page numbers of your book.";
+  } else {
+    const titleValue = document.querySelector("#title").value;
+    const authorValue = document.querySelector("#author").value;
+    const pagesValue = document.querySelector("#pages").value;
+    const readStatusValue = document.querySelector("#readStatus").value;
+        /*
+    const newBook = new Book(
+      titleValue,
+      authorValue,
+      pagesValue,
+      readStatusValue
+    );
+        if (!Book.validateBook(newBook)) {
+          badSubmission.textContent = `Invalid submission. Try again.`;
+          return;
+        }
+      */
+    addBookToLibrary(titleValue, authorValue, pagesValue, readStatusValue);
+    updateLibrary();
 
-  const badSubmission = document.querySelector(".bad-submission");
-
-  const newBook = new Book(
-    titleValue,
-    authorValue,
-    pagesValue,
-    readStatusValue
-  );
-
-  if (!Book.validateBook(newBook)) {
-    badSubmission.textContent = `Invalid submission. Try again.`;
-    return;
+    form.reset();
+    badSubmission.textContent = "";
   }
-
-  addBookToLibrary(titleValue, authorValue, pagesValue, readStatusValue);
-  updateLibrary();
 });
 
 /* Printing the library */
